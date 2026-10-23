@@ -1,0 +1,476 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DR Daily – Design Thinking One-Pager</title>
+<style>
+  :root{
+    --red:#e4002b; --red-d:#b30022; --black:#000; --bg:#0a0a0a; --card:#151515; --card2:#1d1d1d;
+    --line:#2c2c2c; --text:#f4f4f4; --mute:#a3a3a3; --white:#fff;
+    --r:14px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--text);font:15px/1.5 "Helvetica Neue",Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased}
+  a{color:inherit}
+  .wrap{max-width:1240px;margin:0 auto;padding:0 20px}
+
+  /* header */
+  header{background:var(--black);border-bottom:4px solid var(--red)}
+  .top{display:flex;align-items:center;gap:16px;padding:18px 0;flex-wrap:wrap}
+  .logo{background:var(--red);color:#fff;font-weight:900;font-size:26px;letter-spacing:-1px;padding:2px 10px;border-radius:4px;line-height:1.2}
+  .top .tag{color:var(--mute);font-size:13px;letter-spacing:.14em;text-transform:uppercase}
+  nav{margin-left:auto;display:flex;gap:6px;flex-wrap:wrap}
+  nav a{text-decoration:none;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:6px 10px;border:1px solid var(--line);border-radius:99px;color:var(--mute)}
+  nav a:hover{border-color:var(--red);color:#fff}
+  .hero{padding:34px 0 40px;display:grid;grid-template-columns:1.5fr 1fr;gap:32px;align-items:end}
+  h1{font-size:clamp(34px,6vw,64px);line-height:1;letter-spacing:-.03em;font-weight:900}
+  h1 em{font-style:normal;color:var(--red)}
+  .hero p{color:#d6d6d6;margin-top:14px;max-width:60ch;font-size:16px}
+  .kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+  .kpi{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:14px}
+  .kpi b{display:block;font-size:30px;line-height:1;color:var(--red);font-weight:900}
+  .kpi span{font-size:12px;color:var(--mute)}
+
+  /* sprint bands */
+  .sprint{padding:44px 0 8px}
+  .sprint-h{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin-bottom:20px;border-bottom:1px solid var(--line);padding-bottom:12px}
+  .badge{background:var(--red);color:#fff;font-weight:900;font-size:12px;letter-spacing:.12em;text-transform:uppercase;padding:4px 10px;border-radius:4px}
+  .sprint-h h2{font-size:26px;letter-spacing:-.02em}
+  .sprint-h small{color:var(--mute);font-size:13px}
+  .grid{display:grid;gap:16px}
+  .grid>*{min-width:0}
+  .g2{grid-template-columns:repeat(2,1fr)}
+  .g3{grid-template-columns:repeat(3,1fr)}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:18px}
+  .card h3{font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--red);margin-bottom:10px;font-weight:800}
+  .card h4{font-size:15px;margin-bottom:4px}
+  .span2{grid-column:span 2}
+  .span3{grid-column:1/-1}
+  ul.l{list-style:none}
+  ul.l li{padding-left:16px;position:relative;margin:5px 0;color:#dcdcdc;font-size:14px}
+  ul.l li::before{content:"";position:absolute;left:0;top:.6em;width:7px;height:7px;background:var(--red);border-radius:50%}
+  .muted{color:var(--mute);font-size:13px}
+
+  /* empathy map */
+  .emp{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:auto auto;gap:10px;position:relative}
+  .emp div{background:var(--card2);border-radius:10px;padding:12px;font-size:13.5px}
+  .emp div b{display:block;color:#fff;margin-bottom:4px;font-size:12px;letter-spacing:.1em;text-transform:uppercase}
+  .pg{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
+  .pg div{border-radius:10px;padding:12px;font-size:13.5px}
+  .pg .pain{background:rgba(228,0,43,.14);border:1px solid var(--red-d)}
+  .pg .gain{background:#fff;color:#000}
+  .pg b{display:block;font-size:12px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px}
+
+  /* problem tree */
+  .tree{display:flex;flex-direction:column;gap:8px;align-items:stretch}
+  .row{display:grid;gap:8px}
+  .row.c3{grid-template-columns:repeat(3,1fr)}
+  .node{background:var(--card2);border-radius:8px;padding:9px 10px;font-size:13px;text-align:center}
+  .node.eff{border-top:3px solid #fff}
+  .node.core{background:var(--red);font-weight:800;font-size:15px;padding:14px;text-align:center}
+  .node.cause{border-bottom:3px solid var(--red)}
+  .lbl{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute);text-align:center}
+
+  /* 5w+h */
+  .w6{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+  .w6 div{background:var(--card2);border-radius:10px;padding:12px;font-size:13.5px}
+  .w6 b{display:block;color:var(--red);font-size:20px;line-height:1;font-weight:900;margin-bottom:6px}
+
+  /* persona */
+  .persona{display:grid;grid-template-columns:150px 1fr;gap:18px}
+  .avatar{aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 35% 30%,#ff4d6b,var(--red) 55%,#6b0014);display:grid;place-items:center;font-size:54px;font-weight:900;color:#fff;align-self:start}
+  .persona h4{font-size:22px}
+  .chips{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}
+  .chip{font-size:12px;padding:3px 9px;border-radius:99px;border:1px solid var(--line);color:#ddd}
+  .quote{border-left:3px solid var(--red);padding-left:12px;font-style:italic;color:#fff;margin:10px 0}
+
+  /* lotus */
+  .lotus{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;aspect-ratio:1;max-width:470px;margin:0 auto}
+  .lotus div{background:var(--card2);border-radius:10px;display:grid;place-items:center;text-align:center;padding:6px;font-size:12.5px;line-height:1.25}
+  .lotus .mid{background:var(--red);font-weight:900;font-size:15px}
+  .lotus b{display:block;color:#fff;font-size:13px}
+  .lotus span{color:var(--mute);font-size:11.5px}
+
+  /* mind map */
+  .mm{display:grid;grid-template-columns:1fr auto 1fr;gap:14px;align-items:center}
+  .mm .col{display:flex;flex-direction:column;gap:10px}
+  .mm .ctr{background:var(--red);border-radius:50%;width:112px;height:112px;display:grid;place-items:center;text-align:center;font-weight:900;font-size:15px;padding:10px;line-height:1.1}
+  .br{background:var(--card2);border-left:3px solid var(--red);border-radius:8px;padding:8px 10px;font-size:13px}
+  .br b{display:block;font-size:13px}
+  .br span{color:var(--mute);font-size:12px}
+  .mm .col.r .br{border-left:0;border-right:3px solid var(--red);text-align:right}
+
+  /* dark side */
+  .dark{background:#000;border-color:var(--red-d)}
+  .dk{display:grid;grid-template-columns:1fr 24px 1fr;gap:6px 10px;align-items:center;font-size:13px;margin:6px 0}
+  .dk .bad{background:rgba(228,0,43,.15);border:1px solid var(--red-d);padding:8px 10px;border-radius:8px}
+  .dk .good{background:var(--card2);padding:8px 10px;border-radius:8px}
+  .dk i{font-style:normal;color:var(--red);text-align:center;font-weight:900}
+
+  /* journey */
+  .jm{overflow-x:auto}
+  .jm table{border-collapse:separate;border-spacing:6px;width:100%;min-width:860px;font-size:13px}
+  .jm th{background:var(--red);padding:8px;border-radius:8px;font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+  .jm td{background:var(--card2);padding:9px;border-radius:8px;vertical-align:top}
+  .jm td.rl{background:transparent;color:var(--mute);font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-weight:800;width:92px;padding-left:0}
+  .emo{display:flex;align-items:flex-end;gap:0;height:46px}
+  .emo span{flex:1;background:var(--red);border-radius:4px 4px 0 0;opacity:.85}
+
+  /* dot vote */
+  .vote{display:grid;grid-template-columns:150px 1fr 30px;gap:10px;align-items:center;margin:8px 0;font-size:13px}
+  .dots{display:flex;flex-wrap:wrap;gap:4px}
+  .dots i{width:13px;height:13px;border-radius:50%;background:var(--red);display:block}
+  .vote.win .dots i{background:#fff}
+  .vote.win{font-weight:800}
+  .vote .n{color:var(--mute);text-align:right}
+
+  /* prototype */
+  .proto{display:grid;grid-template-columns:1fr 1.5fr;gap:24px;align-items:start}
+  .phones{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+  .phone{width:210px;background:#000;border:6px solid #2a2a2a;border-radius:30px;padding:12px 10px 10px;min-height:430px;display:flex;flex-direction:column;gap:8px;box-shadow:0 10px 30px rgba(0,0,0,.5)}
+  .phone .bar{width:60px;height:5px;background:#2a2a2a;border-radius:9px;margin:0 auto 4px}
+  .phone .hd{display:flex;justify-content:space-between;align-items:center;font-weight:900}
+  .phone .hd .logo{font-size:13px;padding:0 6px}
+  .phone .hd small{color:var(--mute);font-weight:400;font-size:10px}
+  .phone h5{font-size:15px;line-height:1.15}
+  .phone p{font-size:10.5px;color:#cfcfcf;line-height:1.35}
+  .tile{background:var(--card2);border-radius:10px;padding:8px;font-size:10.5px}
+  .tile.hot{background:linear-gradient(135deg,var(--red),#7a0017)}
+  .tile b{display:block;font-size:11.5px}
+  .tag2{display:inline-block;font-size:9px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;background:#fff;color:#000;padding:1px 5px;border-radius:3px;margin-bottom:3px}
+  .tog{display:flex;justify-content:space-between;align-items:center;font-size:10.5px;background:var(--card2);padding:7px 8px;border-radius:8px}
+  .sw{width:26px;height:14px;background:var(--red);border-radius:9px;position:relative}
+  .sw::after{content:"";position:absolute;right:2px;top:2px;width:10px;height:10px;background:#fff;border-radius:50%}
+  .sw.off{background:#444}.sw.off::after{right:auto;left:2px}
+  .btn{background:var(--red);text-align:center;font-weight:800;font-size:12px;padding:9px;border-radius:99px;margin-top:auto}
+  .btn.ghost{background:transparent;border:1px solid var(--line);color:var(--mute);margin-top:0;font-weight:600;font-size:11px;padding:7px}
+  .nav5{display:flex;justify-content:space-around;border-top:1px solid #2a2a2a;padding-top:7px;font-size:9px;color:var(--mute);margin-top:auto}
+  .nav5 .on{color:#fff;font-weight:800}
+  .face{display:flex;gap:-4px;margin:4px 0}
+  .face i{width:22px;height:22px;border-radius:50%;border:2px solid #000;margin-right:-6px;display:block}
+  .feat{display:grid;gap:10px}
+  .feat div{background:var(--card2);border-radius:10px;padding:11px 13px;display:grid;grid-template-columns:34px 1fr;gap:12px;align-items:start;font-size:13.5px}
+  .feat .ic{width:34px;height:34px;border-radius:9px;background:var(--red);display:grid;place-items:center;font-weight:900}
+
+  /* test */
+  .step{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+  .step div{background:var(--card2);border-radius:10px;padding:12px;font-size:13px;position:relative}
+  .step b{display:block;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--red);margin-bottom:4px}
+  table.t{width:100%;border-collapse:collapse;font-size:13px}
+  table.t th,table.t td{text-align:left;padding:8px 6px;border-bottom:1px solid var(--line)}
+  table.t th{color:var(--mute);font-size:11px;letter-spacing:.1em;text-transform:uppercase}
+  .todo{color:var(--red);font-weight:700}
+
+  footer{margin-top:50px;background:#000;border-top:4px solid var(--red);padding:22px 0;color:var(--mute);font-size:13px}
+  footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+  footer b{color:#fff}
+
+  @media (max-width:900px){
+    .hero,.g2,.g3,.proto,.mm{grid-template-columns:1fr}
+    .span2{grid-column:auto}
+    .lotus{aspect-ratio:auto}.lotus div{min-height:70px}
+    .mm .ctr{margin:0 auto}
+    .mm .col.r .br{text-align:left;border-right:0;border-left:3px solid var(--red)}
+    .step{grid-template-columns:1fr 1fr}
+    .vote{grid-template-columns:110px 1fr 24px}
+    nav{margin-left:0}
+  }
+  @media (max-width:560px){
+    .persona{grid-template-columns:1fr}.avatar{width:110px}
+    .w6{grid-template-columns:1fr 1fr}
+    .step{grid-template-columns:1fr}
+  }
+  @media print{
+    body{background:#fff;color:#000}
+    .card,.kpi,.node,.w6 div,.emp div,.br,.good,.step div,.jm td,.lotus div,.feat div,.tile,.tog{background:#f2f2f2!important;color:#000!important}
+    header,footer{background:#000!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    nav{display:none}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="top">
+      <div class="logo">dr</div>
+      <div class="tag">Different Together · Design Thinking One-Pager</div>
+      <nav>
+        <a href="#s1">1 Empathize + Define</a><a href="#s2">2 Ideate</a><a href="#s3">3 Prototype</a><a href="#s4">4 Test</a>
+      </nav>
+    </div>
+    <div class="hero">
+      <div>
+        <h1>Make DR a <em>daily habit</em> for 15–46 year olds.</h1>
+        <p><b>Challenge:</b> create user engagement in DR's digital products (DRTV, DR LYD, dr.dk / DR Nyheder app) in line with the strategy <i>"Different Together"</i> – so that <b>5 in 10 users</b> use DR daily, and more of them <b>log in and give consent</b>.</p>
+      </div>
+      <div class="kpis">
+        <div class="kpi"><b>5 / 10</b><span>users daily on DR's platforms</span></div>
+        <div class="kpi"><b>15–46</b><span>target age group</span></div>
+        <div class="kpi"><b>Login + consent</b><span>the behaviour we must unlock</span></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+<!-- ===================== SPRINT 1 ===================== -->
+<section class="sprint" id="s1">
+  <div class="sprint-h"><span class="badge">Sprint 1</span><h2>Phase 1 &amp; 2 – Empathize &amp; Define</h2><small>Empathy map · Problem tree · 5W+H · Persona</small></div>
+
+  <div class="grid g2">
+    <div class="card">
+      <h3>Empathy map – "Maja, 23"</h3>
+      <div class="emp">
+        <div><b>Says</b>"I'll just Google it." · "I don't want another account." · "DR is for my parents."</div>
+        <div><b>Thinks</b>"Why do they need my data?" · "Is it worth the hassle?" · "Netflix/Spotify/TikTok already know me."</div>
+        <div><b>Does</b>Scrolls TikTok &amp; Instagram, streams Spotify, watches Netflix. Opens DR via a shared link, then leaves.</div>
+        <div><b>Feels</b>Annoyed by pop-ups and cookie walls. Curious about local news and good stories, but not seen.</div>
+      </div>
+      <div class="pg">
+        <div class="pain"><b>Pains</b>Consent banners feel like a barrier · content feels "old" · no reason to come back tomorrow</div>
+        <div class="gain"><b>Gains</b>Fast, relevant, trustworthy content · feeling part of something · control over own data</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Problem tree</h3>
+      <div class="tree">
+        <div class="lbl">Effects</div>
+        <div class="row c3">
+          <div class="node eff">Daily reach among 15–46 is low</div>
+          <div class="node eff">Few logged-in users → weak personalisation</div>
+          <div class="node eff">Public service loses relevance with the young</div>
+        </div>
+        <div class="node core">Young people don't see a reason to log in, consent and return daily</div>
+        <div class="lbl">Causes</div>
+        <div class="row c3">
+          <div class="node cause">Login/consent is shown <i>before</i> value is felt</div>
+          <div class="node cause">Three platforms feel like three separate worlds</div>
+          <div class="node cause">No daily hook, no social layer, feed feels generic</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Method – 5W + H</h3>
+      <div class="w6">
+        <div><b>Who</b>15–46 year olds, esp. students &amp; young professionals who are light/non-users of DR.</div>
+        <div><b>What</b>Low daily use, low login and consent rates across DRTV, LYD and DR Nyheder.</div>
+        <div><b>When</b>Commute, lunch, evenings, breaking news moments, big events.</div>
+        <div><b>Where</b>Phone first; connected TV in the evening; headphones on the go.</div>
+        <div><b>Why</b>Login is seen as friction with no reward; DR feels generic and "for older people".</div>
+        <div><b>How</b>Value-first onboarding, one DR profile across all platforms, daily rituals, togetherness.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Persona</h3>
+      <div class="persona">
+        <div class="avatar">M</div>
+        <div>
+          <h4>Maja Jensen, 23</h4>
+          <div class="muted">Student &amp; part-time barista · Aarhus · lives with two flatmates</div>
+          <div class="chips"><span class="chip">iPhone</span><span class="chip">Spotify</span><span class="chip">TikTok</span><span class="chip">Netflix</span><span class="chip">Privacy-aware</span></div>
+          <ul class="l">
+            <li><b>Goal:</b> stay informed without effort, find stories worth talking about</li>
+            <li><b>Frustration:</b> pop-ups, forced accounts, content that isn't "for me"</li>
+            <li><b>Trigger:</b> a friend sends a link; a podcast or doc everyone is discussing</li>
+          </ul>
+          <div class="quote">"Show me why it's worth it – then I'll sign in."</div>
+        </div>
+      </div>
+      <p class="muted" style="margin-top:8px">Fictional persona based on our assumptions – to be validated with interviews.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== SPRINT 2 ===================== -->
+<section class="sprint" id="s2">
+  <div class="sprint-h"><span class="badge">Sprint 2</span><h2>Phase 3 – Ideate</h2><small>Lotus blossom · Mind map · Dark side · Customer journey · Dot voting</small></div>
+
+  <div class="grid g2">
+    <div class="card">
+      <h3>Lotus blossom</h3>
+      <div class="lotus">
+        <div><b>Personal feed</b><span>"Din dag" across TV, LYD, news</span></div>
+        <div><b>Watch / listen together</b><span>rooms with friends</span></div>
+        <div><b>Daily ritual</b><span>5-min morning brief + streak</span></div>
+        <div><b>One DR profile</b><span>1 login, all platforms</span></div>
+        <div class="mid">Reasons to log in &amp; return daily</div>
+        <div><b>Clear consent</b><span>3 simple choices, in plain Danish</span></div>
+        <div><b>Local &amp; youth voices</b><span>stories from your area</span></div>
+        <div><b>Short-form</b><span>clips from DR shows &amp; podcasts</span></div>
+        <div><b>Rewards</b><span>early access, pick-the-playlist</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Mind map</h3>
+      <div class="mm">
+        <div class="col">
+          <div class="br"><b>Content</b><span>shorts · docs · podcasts · live events</span></div>
+          <div class="br"><b>Personalisation</b><span>interests · location · mood · time of day</span></div>
+          <div class="br"><b>Trust</b><span>transparent data use · no dark patterns</span></div>
+        </div>
+        <div class="ctr">Daily DR</div>
+        <div class="col r">
+          <div class="br"><b>Community</b><span>watch parties · comments · share-to-friend</span></div>
+          <div class="br"><b>Habit</b><span>morning brief · streak · push (opt-in)</span></div>
+          <div class="br"><b>Access</b><span>one login · TV ↔ LYD ↔ app hand-off</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card dark">
+      <h3>Dark side – how could this go wrong?</h3>
+      <div class="dk"><div class="bad">Hard login wall blocks content</div><i>→</i><div class="good">Browse first, ask for login at the moment of value</div></div>
+      <div class="dk"><div class="bad">Sneaky, pre-ticked consent</div><i>→</i><div class="good">Granular, honest toggles; "no" is as easy as "yes"</div></div>
+      <div class="dk"><div class="bad">Streaks that create guilt / doomscrolling</div><i>→</i><div class="good">Gentle rituals, "you're done for today" moments</div></div>
+      <div class="dk"><div class="bad">Filter bubble – only what I already like</div><i>→</i><div class="good">Public-service "need to know" slot in every feed</div></div>
+      <div class="dk"><div class="bad">Chat rooms attract toxicity</div><i>→</i><div class="good">Friend-only rooms, moderation, age-aware defaults for 15+</div></div>
+    </div>
+
+    <div class="card">
+      <h3>Dot voting – which idea to build?</h3>
+      <div class="vote win"><span>One profile + value-first consent</span><div class="dots"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><span class="n">8</span></div>
+      <div class="vote win"><span>Personal "Din dag" feed</span><div class="dots"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><span class="n">7</span></div>
+      <div class="vote win"><span>Watch / listen together</span><div class="dots"><i></i><i></i><i></i><i></i><i></i><i></i></div><span class="n">6</span></div>
+      <div class="vote"><span>Daily morning brief</span><div class="dots"><i></i><i></i><i></i><i></i></div><span class="n">4</span></div>
+      <div class="vote"><span>Rewards / early access</span><div class="dots"><i></i><i></i><i></i></div><span class="n">3</span></div>
+      <div class="vote"><span>Short-form clips</span><div class="dots"><i></i><i></i></div><span class="n">2</span></div>
+      <p class="muted" style="margin-top:8px">Top 3 combined into one concept → <b style="color:#fff">"DR Sammen"</b></p>
+    </div>
+
+    <div class="card span2">
+      <h3>Customer journey map – Maja</h3>
+      <div class="jm">
+        <table>
+          <tr><td class="rl"></td><th>Discover</th><th>Try</th><th>Sign up &amp; consent</th><th>First week</th><th>Habit</th><th>Advocate</th></tr>
+          <tr><td class="rl">Does</td><td>Friend shares a DR link</td><td>Opens it, reads / watches without account</td><td>Sees "Save &amp; personalise" and creates profile</td><td>Gets "Din dag", listens to LYD on the bus</td><td>Opens app every morning; watches TV with friends</td><td>Invites friends to a watch room</td></tr>
+          <tr><td class="rl">Touchpoint</td><td>Social / messages</td><td>dr.dk · app</td><td>Onboarding</td><td>App · LYD · DRTV</td><td>App · push (opt-in)</td><td>Share link</td></tr>
+          <tr><td class="rl">Pain</td><td>"Not for me"</td><td>Cookie wall</td><td>Too many choices, unclear why</td><td>Generic content</td><td>Notification overload</td><td>No easy way to share</td></tr>
+          <tr><td class="rl">Opportunity</td><td>Shareable, snackable cards</td><td>Let content come first</td><td>3 clear toggles + visible benefit</td><td>Interest picker in 20 sec</td><td>Daily brief, smart timing</td><td>Rooms + invite link</td></tr>
+          <tr><td class="rl">Feeling</td><td><div class="emo"><span style="height:45%"></span></div></td><td><div class="emo"><span style="height:35%"></span></div></td><td><div class="emo"><span style="height:25%"></span></div></td><td><div class="emo"><span style="height:65%"></span></div></td><td><div class="emo"><span style="height:85%"></span></div></td><td><div class="emo"><span style="height:100%"></span></div></td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== SPRINT 3 ===================== -->
+<section class="sprint" id="s3">
+  <div class="sprint-h"><span class="badge">Sprint 3</span><h2>Phase 4 – Prototype</h2><small>Our solution: redesign of the DR app → "DR Sammen"</small></div>
+
+  <div class="card">
+    <div class="proto">
+      <div>
+        <h3>Concept: DR Sammen</h3>
+        <p style="margin-bottom:12px">One app and one DR profile that connects <b>DRTV, DR LYD and DR Nyheder</b> – and turns consuming public service into something you do <b>together</b>.</p>
+        <div class="feat">
+          <div><span class="ic">1</span><span><b>Value-first onboarding.</b> Browse freely; ask for login when you want to save, continue on TV or personalise. Consent in 3 plain-language toggles.</span></div>
+          <div><span class="ic">2</span><span><b>"Din dag" feed.</b> News, podcasts and shows mixed for your day – morning brief, commute, evening.</span></div>
+          <div><span class="ic">3</span><span><b>Sammen rooms.</b> Watch or listen live with friends; react, share, continue on TV.</span></div>
+          <div><span class="ic">4</span><span><b>Seamless hand-off.</b> Start on the phone, finish on DRTV or in the car via LYD – logged in everywhere.</span></div>
+        </div>
+        <p class="muted" style="margin-top:10px">Supports "Different Together": togetherness, relevance for all ages, and trust through transparent data use.</p>
+      </div>
+
+      <div class="phones">
+        <!-- Screen 1 onboarding -->
+        <div class="phone">
+          <div class="bar"></div>
+          <div class="hd"><span class="logo">dr</span><small>Step 2 of 3</small></div>
+          <h5>Make DR yours</h5>
+          <p>You choose what we use. Change anytime.</p>
+          <div class="tog"><span>Personal recommendations</span><span class="sw"></span></div>
+          <div class="tog"><span>Continue across TV, LYD &amp; app</span><span class="sw"></span></div>
+          <div class="tog"><span>Tailored marketing</span><span class="sw off"></span></div>
+          <p style="margin-top:2px">Why we ask → <u>see in 10 seconds</u></p>
+          <div class="btn">Save my choices</div>
+          <div class="btn ghost">Not now – keep browsing</div>
+        </div>
+        <!-- Screen 2 home -->
+        <div class="phone">
+          <div class="bar"></div>
+          <div class="hd"><span class="logo">dr</span><small>Good morning, Maja</small></div>
+          <h5>Din dag</h5>
+          <div class="tile hot"><span class="tag2">5 min</span><b>Morning brief</b>What you need to know today</div>
+          <div class="tile"><span class="tag2">Near you</span><b>Aarhus: new bike lanes open</b>DR Østjylland · 2 min</div>
+          <div class="tile"><span class="tag2">LYD</span><b>Podcast for your commute</b>Continue · 14 min left</div>
+          <div class="tile"><span class="tag2">TV</span><b>Tonight: new doc series</b>3 friends are watching</div>
+          <div class="nav5"><span class="on">Din dag</span><span>Nyheder</span><span>TV</span><span>LYD</span><span>Sammen</span></div>
+        </div>
+        <!-- Screen 3 together -->
+        <div class="phone">
+          <div class="bar"></div>
+          <div class="hd"><span class="logo">dr</span><small>Sammen</small></div>
+          <h5>Watch party</h5>
+          <div class="tile hot"><span class="tag2">Live</span><b>Landsholdet vs. Norge</b>DRTV · 4 friends inside</div>
+          <div class="face"><i style="background:#e4002b"></i><i style="background:#fff"></i><i style="background:#888"></i><i style="background:#555"></i></div>
+          <div class="tile"><b>Sofie:</b> That pass!! 🔥</div>
+          <div class="tile"><b>Jonas:</b> Switching to the radio commentary</div>
+          <div class="btn">Invite a friend</div>
+          <div class="btn ghost">Continue on TV</div>
+          <div class="nav5"><span>Din dag</span><span>Nyheder</span><span>TV</span><span>LYD</span><span class="on">Sammen</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== SPRINT 4 ===================== -->
+<section class="sprint" id="s4">
+  <div class="sprint-h"><span class="badge">Sprint 4</span><h2>Phase 5 – Test</h2><small>Validate, measure, iterate</small></div>
+
+  <div class="grid g2">
+    <div class="card span2">
+      <h3>Test plan</h3>
+      <div class="step">
+        <div><b>1 · Usability</b>5–8 users aged 15–46 click through the prototype (think-aloud). Task: "Find tonight's show and save it."</div>
+        <div><b>2 · Consent A/B</b>A: classic cookie wall. B: value-first toggles. Compare login + consent rate.</div>
+        <div><b>3 · Desirability</b>Would you open this tomorrow? Rate 1–5. What would make you invite a friend?</div>
+        <div><b>4 · Iterate</b>Fix top 3 friction points, re-test with new users, hand over findings to DR.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Hypotheses &amp; success metrics</h3>
+      <table class="t">
+        <tr><th>If we…</th><th>…then</th></tr>
+        <tr><td>show value before login</td><td>login rate ↑</td></tr>
+        <tr><td>offer 3 clear toggles</td><td>consent rate ↑, trust ↑</td></tr>
+        <tr><td>add "Din dag" + Sammen</td><td>daily use &amp; 7-day return ↑</td></tr>
+        <tr><td>link TV, LYD, app</td><td>more cross-platform users</td></tr>
+      </table>
+    </div>
+
+    <div class="card">
+      <h3>Results &amp; learnings</h3>
+      <table class="t">
+        <tr><th>Measure</th><th>Result</th></tr>
+        <tr><td>Task success</td><td class="todo">__ / __ users</td></tr>
+        <tr><td>Consent: A vs. B</td><td class="todo">__ % vs. __ %</td></tr>
+        <tr><td>"Would use daily"</td><td class="todo">__ / __ users</td></tr>
+        <tr><td>Biggest friction</td><td class="todo">fill in after testing</td></tr>
+      </table>
+      <p class="muted" style="margin-top:8px">Fill in the red fields after the user tests – we have not tested yet.</p>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <span><b>DR Sammen</b> – student project · Design Thinking · Different Together</span>
+    <span>Concept for educational purposes – not an official DR product.</span>
+  </div>
+</footer>
+
+</body>
+</html>
