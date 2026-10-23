@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>News that fits you – Executive Summary</title>
+<style>
+  :root{--red:#d8281e;--black:#000;--ink:#111;--mute:#6b6b6b;--line:#e3e3e3;--soft:#f5f5f5}
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{background:#fff;color:var(--ink);font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased;
+       height:100dvh;overflow:hidden;display:grid;grid-template-rows:auto auto minmax(0,1fr) auto;
+       font-size:clamp(10.5px,min(1.75vh,1.0vw),20px);line-height:1.38}
+
+  .bar{display:flex;align-items:center;gap:clamp(14px,3vw,44px);padding:8px 30px;border-bottom:1px solid var(--line)}
+  .logo{background:var(--black);color:#fff;font-weight:900;font-size:24px;letter-spacing:.04em;line-height:1;padding:6px 16px 6px 14px;font-family:"Arial Black",Impact,Helvetica,Arial,sans-serif}
+  .bar nav{display:flex;gap:clamp(14px,3vw,40px);font-size:clamp(13px,1.4vw,18px)}
+  .bar nav b{font-weight:900;letter-spacing:.04em}
+  .bar nav span{color:#333}
+  .bar .tag{margin-left:auto;color:var(--mute);font-size:.9em}
+
+  .title{display:flex;align-items:stretch;border-bottom:1px solid var(--line)}
+  .title .lab{display:flex;align-items:center;gap:10px;padding:0 22px 0 30px;color:var(--red);font-weight:800;font-size:1.35em;border-right:1px solid var(--line);white-space:nowrap}
+  .title .lab i{width:30px;height:22px;background:var(--red);border-radius:5px;display:grid;place-items:center}
+  .title .lab i::after{content:"";width:11px;height:11px;border:3px solid #fff;border-radius:50%}
+  .title .t{padding:9px 22px}
+  .title h1{font-size:clamp(22px,4.2vh,40px);line-height:1.05;font-weight:900;letter-spacing:-.01em}
+  .title p{color:var(--mute);margin-top:2px}
+
+  .cols{display:grid;grid-template-columns:1fr 1.2fr 1.05fr;min-height:0}
+  .col{padding:12px 20px 10px;border-right:1px solid var(--line);min-height:0;overflow:hidden;display:flex;flex-direction:column;gap:10px}
+  .col:first-child{padding-left:30px}
+  .col:last-child{border-right:0;padding-right:30px}
+  .sec .k{color:var(--red);font-weight:800;font-size:.95em}
+  .sec h2{font-size:1.45em;line-height:1.1;font-weight:900;margin:1px 0 5px}
+  .sec p{margin-bottom:5px}
+  .sec ul{list-style:none}
+  .sec li{position:relative;padding-left:13px;margin:3px 0}
+  .sec li::before{content:"";position:absolute;left:0;top:.55em;width:6px;height:6px;background:var(--red);border-radius:50%}
+  .sec li b{font-weight:800}
+  .q{font-weight:800}
+  .box{background:var(--soft);border-left:3px solid var(--red);padding:7px 10px;border-radius:2px;margin-top:6px}
+  .box b{font-weight:800}
+  .num li::before{display:none}
+  .num{counter-reset:n}
+  .num li{padding-left:22px;counter-increment:n}
+  .num li::after{content:counter(n);position:absolute;left:0;top:.05em;width:16px;height:16px;border-radius:50%;background:var(--red);color:#fff;font-size:.8em;font-weight:800;display:grid;place-items:center}
+
+  footer{background:var(--black);color:#fff;padding:8px 30px;display:flex;gap:16px;flex-wrap:wrap;justify-content:space-between;font-size:.92em}
+  footer b{color:#fff}
+  footer span{color:#bbb}
+  footer .todo{color:#ff8b84;font-weight:700}
+
+  @media (max-width:980px){
+    body{height:auto;overflow:auto;display:block;font-size:15px}
+    .bar{flex-wrap:wrap;padding:10px 16px}.bar .tag{margin-left:0}
+    .title{flex-direction:column}.title .lab{padding:10px 16px}.title .t{padding:10px 16px}
+    .cols{grid-template-columns:1fr}
+    .col,.col:first-child,.col:last-child{padding:14px 16px;border-right:0;border-bottom:1px solid var(--line)}
+    footer{padding:10px 16px}
+  }
+  @media print{
+    @page{size:A4 landscape;margin:5mm}
+    *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  }
+</style>
+</head>
+<body>
+
+<header class="bar">
+  <div class="logo">DR</div>
+  <nav><b>EXECUTIVE SUMMARY</b><span>Different Together</span></nav>
+  <div class="tag">Keeping DR relevant for 15–25 year olds</div>
+</header>
+
+<div class="title">
+  <div class="lab"><i></i>Nyheder</div>
+  <div class="t">
+    <h1>News that fits you</h1>
+    <p>Keeping DR relevant for 15-25 year olds through a personalised news app</p>
+  </div>
+</div>
+
+<main class="cols">
+
+  <div class="col">
+    <section class="sec">
+      <span class="k">A</span>
+      <h2>Our solution in a nutshell</h2>
+      <p>We redesign the DR app around one question: <span class="q">"Nyheder der passer til dig"</span>. Instead of one feed for everyone, each user builds their own news experience in under a minute:</p>
+      <ul>
+        <li><b>Onboarding:</b> the user sets recommendations, topics and notifications, adds name and age, and picks the topics they want daily (e.g. climate or domestic news). Other topics are hidden.</li>
+        <li><b>"Til dig"</b> section on the news page shows only what the user has chosen.</li>
+        <li><b>New "Profil" tab</b> (replaces "Valg i USA"): edit interests, age and preferred news-page layout at any time.</li>
+        <li><b>Clearer menu:</b> redesigned to be more structured and easier to navigate.</li>
+        <li><b>Actionable notifications and a phone widget:</b> a message no longer just says "rain is coming", it also tells you what to do. The same news is available as a widget on the home screen.</li>
+      </ul>
+    </section>
+  </div>
+
+  <div class="col">
+    <section class="sec">
+      <span class="k">B</span>
+      <h2>Our rationale</h2>
+      <p>Our empathy map and problem tree show that 15-25 year olds feel overwhelmed by too much, unstructured and often negative content, have little time, and find DR less interesting than competitors. Each part of the solution answers one of these causes:</p>
+      <ul>
+        <li><b>Overflow and no structure:</b> choosing topics and a layout cuts the noise and gives a clear starting point.</li>
+        <li><b>Not interesting enough:</b> age and interests shape what is shown, so the content feels relevant to the user's own life.</li>
+        <li><b>Not a constant commitment:</b> the widget and useful notifications give a reason to return daily (our assumption, to be tested).</li>
+      </ul>
+      <div class="box"><b>Evidence:</b> The 2026 report "Danskernes brug af nyhedsmedier" (RUC) finds that 18-24 year olds have the highest willingness to pay for news, so the interest is there. Statistics Denmark shows that many young people get news from social media instead of TV or newspapers. A study of 13-15 year olds (AAU) warns that DR risks "losing a generation". Our solution makes DR easier to choose.</div>
+      <div class="box"><b>Methods used:</b> empathy map, problem tree, 5W1H, persona, lotus blossom, mind map, dark side, customer journey map and dot voting.</div>
+    </section>
+  </div>
+
+  <div class="col">
+    <section class="sec">
+      <span class="k">C</span>
+      <h2>Our innovation</h2>
+      <ul>
+        <li><b>Personal, not just topic follow:</b> age, interests and layout are combined, so the front page looks different for each user.</li>
+        <li><b>Notifications that help:</b> they give advice on what to do, not only information.</li>
+        <li><b>Built for young users, with public service in mind:</b> users can narrow their feed, and DR keeps its role as a trusted source.</li>
+        <li><b>Low effort for DR:</b> it is a redesign of the existing app, not a new platform.</li>
+      </ul>
+    </section>
+    <section class="sec">
+      <span class="k">D</span>
+      <h2>Recommendation for the next steps</h2>
+      <ul class="num">
+        <li><b>Test:</b> build a clickable prototype and test it with 8-10 users aged 15-25 (usability and short interviews).</li>
+        <li><b>Pilot:</b> release the new front page to a share of young users in the DR app and compare with the current version (A/B test).</li>
+        <li><b>Improve and roll out:</b> adjust based on results, then launch to all users.</li>
+      </ul>
+      <div class="box"><b>Success metrics:</b> share of new users who finish onboarding; daily active users aged 15-25; share who return within 7 days; use of "Til dig", the widget and notifications; user satisfaction. Targets are set together with DR.</div>
+    </section>
+  </div>
+
+</main>
+
+<footer>
+  <b>Contact us</b>
+  <span class="todo">Add your emails here: name@email.dk · name@email.dk · name@email.dk</span>
+  <span>Student concept – not an official DR product</span>
+</footer>
+
+</body>
+</html>
